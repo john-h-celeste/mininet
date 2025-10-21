@@ -1,0 +1,79 @@
+network layer (data plane)
+
+the network layer is made of data and control planes
+
+router:
+    in port - switch - out port
+    buffer and scheduling
+
+internet protocol
+i        p       
+    datagram format
+    addressing
+    network address translation
+    n       a       t          
+
+network layer:
+    transports segments from sender to reciever
+    at sender: transport layer --> segment -> datagram --> link layer
+    at reciever: link layer --> datagram -> segment --> transport layer
+
+router:
+    examines header of all ip packets
+    moves datagrams from input ports to output ports
+
+what the network layer does:
+    forward: move a datagram from an input link to the correct output link
+    routing: determining the routers a datagram passes through
+        uses "routing algorithms"
+        dijkstra and link state
+
+data plane vs control plane
+    data plane is forwarding - completely local
+    control plane is routing - network wide
+
+router architecture:
+    routing processor - slow - milliseconds
+    high speed switching fabric - fast - nanoseconds
+
+the router algorithm creates and updates a forwarding table
+
+forwarding algorithms:
+    destination based: based only on destination ip address
+    generalized: based on any set of ip headers
+
+match the longest ip prefix that matches the destination address
+
+managing the queue/buffer:
+    which to drop when the buffer is full?
+    tail: recent packet is dropped
+    priority: least important packet is dropped
+
+some packets are marked to signal congestion
+    ECN and RED
+
+packet scheduling:
+    which packet to send next?
+    first come first served
+    priority - classify by priority and preferentially send high priority
+    round robin - classify into groups and send one from each group
+    weighted fair - like round robin - but the groups are weighted
+
+network neutrality:
+    the isp should not bias the network toward or away from things
+    no:
+        blocking [lawful] content / devices
+        throttling [lawful] traffic by content / devices
+        paid prioritization - paying for faster data?
+
+ip datagram:
+    16 bit [version - head len - type of service] - 16 bit length
+    16 bit id - flags - segment offset
+    8? bit ttl - 8? bit ttl - 16 bit checksum
+    32 bit source ip address
+    32 bit destination ip address
+    32? bit options
+    payload
+
+ip address [ipv4] - 32 bit identifier for an interface
+interface - connetion between host and physical link
